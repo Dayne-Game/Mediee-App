@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
+import { check, validationResult } from "express-validator";
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
@@ -21,7 +22,7 @@ const authUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
-    res.status(401);
+    res.status(400);
     throw new Error("Invalid email or password");
   }
 });
@@ -31,6 +32,18 @@ const authUser = asyncHandler(async (req, res) => {
 // @ACCESS  PUBLIC
 const registerOwner = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
+
+  if (
+    name === "" ||
+    name === null ||
+    email === "" ||
+    email === null ||
+    password === null ||
+    password === ""
+  ) {
+    res.status(400);
+    throw new Error("Invalid Owner Data");
+  }
 
   // Get User Email
   const userEmailExists = await User.findOne({ email });
@@ -54,6 +67,7 @@ const registerOwner = asyncHandler(async (req, res) => {
     res.status(201).json({
       _id: owner._id,
       name: owner.name,
+      email: owner.email,
       isOwner: owner.isOwner,
       isAdmin: owner.isAdmin,
       token: generateToken(owner._id),
@@ -69,10 +83,12 @@ const registerOwner = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const getUsers = asyncHandler(async (req, res) => {
   if (req.user.isOwner === true) {
-    const ownerStaff = await User.find({});
+    const ownerStaff = await User.find({}).select("-password");
     res.json(ownerStaff);
   } else if (req.user.isAdmin === true && req.user.isOwner === false) {
-    const adminStaff = await User.find({ owner: req.user.owner });
+    const adminStaff = await User.find({ owner: req.user.owner }).select(
+      "-password"
+    );
     res.json(adminStaff);
   } else {
     res.status(401);

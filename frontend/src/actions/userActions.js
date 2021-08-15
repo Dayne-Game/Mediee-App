@@ -6,7 +6,7 @@ import {
   USER_LOGIN_REQUEST,
   USER_REGISTER_FAIL,
   USER_REGISTER_SUCCESS,
-  USER_REGISTER_FAIL,
+  USER_REGISTER_REQUEST,
   USER_LOGOUT,
   STAFF_REGISTER_FAIL,
   STAFF_REGISTER_REQUEST,
@@ -14,6 +14,7 @@ import {
   STAFF_LIST_REQUEST,
   STAFF_LIST_FAIL,
   STAFF_LIST_SUCCESS,
+  STAFF_LIST_RESET,
 } from "../constants/userConstants";
 
 export const login = (email, password) => async (dispatch) => {
@@ -71,7 +72,7 @@ export const register = (name, email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "/api/users",
+      "/api/users/owner",
       { name, email, password },
       config
     );
@@ -126,8 +127,6 @@ export const registerStaff =
         type: STAFF_REGISTER_SUCCESS,
         payload: data,
       });
-
-      dispatch(setAlert("Resident Created", "success"));
     } catch (error) {
       const message =
         error.response && error.response.data.message

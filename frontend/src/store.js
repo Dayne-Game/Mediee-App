@@ -11,11 +11,11 @@ import {
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
-  stafflist: staffListReducer,
+  staffList: staffListReducer,
   staffRegister: staffRegisterReducer,
 });
 
-const userInfoFromStorage = localStorage.getItem(userInfo)
+const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
