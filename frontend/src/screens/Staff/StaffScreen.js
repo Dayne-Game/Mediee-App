@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Card, Table } from "react-bootstrap";
-import { listStaff } from "../../actions/userActions";
+import { Card, Table, Button } from "react-bootstrap";
+import { listStaff, deleteUser } from "../../actions/userActions";
 import Message from "../../components/Message/Message";
 import Loader from "../../components/loader/Loader";
 
@@ -14,15 +14,24 @@ const StaffScreen = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
+
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listStaff());
     } else {
       history.push("/login");
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, successDelete, userInfo]);
 
   console.log(users);
+
+  const deleteHandler = (id) => {
+    if (window.confirm("Are you sure? This cannot be undone.")) {
+      dispatch(deleteUser(id));
+    }
+  };
 
   return (
     <>
@@ -62,7 +71,15 @@ const StaffScreen = ({ history }) => {
                           ></i>
                         )}
                       </td>
-                      <td>DELETE</td>
+                      <td>
+                        <Button
+                          variant="danger"
+                          className="btn-sm"
+                          onClick={() => deleteHandler(user._id)}
+                        >
+                          <i className="fas fa-trash"></i>
+                        </Button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
