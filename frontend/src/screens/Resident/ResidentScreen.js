@@ -17,7 +17,7 @@ const ResidentScreen = ({ history }) => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
+    if (userInfo) {
       dispatch(listResidents());
     } else {
       history.push("/login");
@@ -60,7 +60,9 @@ const ResidentScreen = ({ history }) => {
                   {residents.map((resident) => (
                     <tr key={resident._id}>
                       <td>
-                        <Link to={`/staffprofile/${resident._id}`}>{resident.name}</Link>
+                        <Link to={`/staffprofile/${resident._id}`}>
+                          {resident.name}
+                        </Link>
                       </td>
                       <td>{resident.nhi}</td>
                       <td>
