@@ -19,9 +19,7 @@ const RegisterScreen = ({ location, history }) => {
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
-  const redirect = location.search
-    ? location.search.split("=")[1]
-    : "/dashboard";
+  const redirect = location.search ? location.search.split("=")[1] : "/dashboard";
 
   useEffect(() => {
     if (userInfo) {
@@ -47,42 +45,22 @@ const RegisterScreen = ({ location, history }) => {
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name" className="mb-2">
           <Form.Label>Name</Form.Label>
-          <Form.Control
-            type="name"
-            placeholder="Enter name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></Form.Control>
+          <Form.Control type="name" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)}></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="email" className="mb-2">
           <Form.Label>Email Address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></Form.Control>
+          <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)}></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="password" className="mb-2">
           <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></Form.Control>
+          <Form.Control type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)}></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="confirmPassword" className="mb-3">
           <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Confirm password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          ></Form.Control>
+          <Form.Control type="password" placeholder="Confirm password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}></Form.Control>
         </Form.Group>
 
         <div className="d-grid">
@@ -94,10 +72,7 @@ const RegisterScreen = ({ location, history }) => {
 
       <Row className="py-3">
         <Col>
-          Have an Account?{" "}
-          <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
-            Login
-          </Link>
+          Have an Account? <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>Login</Link>
         </Col>
       </Row>
     </FormContainer>

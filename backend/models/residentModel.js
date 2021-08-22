@@ -85,6 +85,7 @@ const residentSchema = mongoose.Schema(
     },
     nhi: {
       type: String,
+      required: true,
     },
     dob: {
       type: Date,

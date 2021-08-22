@@ -22,16 +22,6 @@ const getResidents = asyncHandler(async (req, res) => {
 const registerResident = asyncHandler(async (req, res) => {
   const { name, nhi, dob, gender, height, weight, bloodtype } = req.body;
 
-  // Get User Email
-  const residentNhiExists = await Resident.findOne({ nhi });
-
-  // Check user email
-  if (residentNhiExists) {
-    res.status(400);
-    throw new Error("Resident Already Exists");
-  }
-
-  // Create Owner
   if (req.user.isOwner === true) {
     const newResident = await Resident.create({
       user: req.user.id,

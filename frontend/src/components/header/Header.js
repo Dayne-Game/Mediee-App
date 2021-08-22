@@ -1,10 +1,8 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
-
 import { LinkContainer } from "react-router-bootstrap";
-import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
-
+import { Navbar, Nav, Container } from "react-bootstrap";
 import "./style.css";
 
 const Header = () => {
@@ -44,8 +42,7 @@ const Header = () => {
                 <Nav className="ms-auto">
                   <Nav.Item>
                     <Nav.Link onClick={logoutHandler}>
-                      <i className="fas fa-sign-out-alt" />{" "}
-                      <span className="hide-sm">{userInfo.name}</span>
+                      <i className="fas fa-sign-out-alt" /> <span className="hide-sm">{userInfo.name}</span>
                     </Nav.Link>
                   </Nav.Item>
                 </Nav>
