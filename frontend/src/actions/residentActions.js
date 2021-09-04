@@ -5,9 +5,9 @@ import {
   RESIDENT_CREATE_REQUEST,
   //   RESIDENT_CREATE_RESET,
   RESIDENT_CREATE_SUCCESS,
-  //   RESIDENT_DELETE_FAIL,
-  //   RESIDENT_DELETE_REQUEST,
-  //   RESIDENT_DELETE_SUCCESS,
+  RESIDENT_DELETE_FAIL,
+  RESIDENT_DELETE_REQUEST,
+  RESIDENT_DELETE_SUCCESS,
   //   RESIDENT_DETAILS_FAIL,
   //   RESIDENT_DETAILS_REQUEST,
   //   RESIDENT_DETAILS_SUCCESS,
@@ -49,7 +49,38 @@ export const listResidents = () => async (dispatch, getState) => {
   }
 };
 
-export const createResident = (name, nhi, dob, height, weight, bloodtype) => async (dispatch, getState) => {
+export const deleteResident = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: RESIDENT_DELETE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(`/api/residents/${id}`, config);
+
+    dispatch({ type: RESIDENT_DELETE_SUCCESS });
+  } catch (error) {
+    const message = error.response && error.response.data.message ? error.response.data.message : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: RESIDENT_DELETE_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const createResident = (name, nhi, dob, gender, height, weight, bloodtype) => async (dispatch, getState) => {
   try {
     dispatch({
       type: RESIDENT_CREATE_REQUEST,
@@ -66,7 +97,7 @@ export const createResident = (name, nhi, dob, height, weight, bloodtype) => asy
       },
     };
 
-    const { data } = await axios.post(`/api/residents`, { name, nhi, dob, height, weight, bloodtype }, config);
+    const { data } = await axios.post(`/api/residents`, { name, nhi, dob, gender, height, weight, bloodtype }, config);
 
     dispatch({
       type: RESIDENT_CREATE_SUCCESS,

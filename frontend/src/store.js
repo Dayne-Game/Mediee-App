@@ -2,11 +2,12 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { userLoginReducer, userRegisterReducer, staffListReducer, staffRegisterReducer, userDeleteReducer, userUpdateReducer, userDetailsReducer } from "./reducers/userReducers";
-import { residentListReducer, residentCreateReducer } from "./reducers/residentReducers";
+import { residentListReducer, residentCreateReducer, residentDeleteReducer } from "./reducers/residentReducers";
 
 const reducer = combineReducers({
   residentList: residentListReducer,
   residentCreate: residentCreateReducer,
+  residentDelete: residentDeleteReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   staffList: staffListReducer,

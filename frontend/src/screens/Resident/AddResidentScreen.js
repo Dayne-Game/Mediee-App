@@ -5,7 +5,7 @@ import Message from "../../components/Message/Message";
 import Loader from "../../components/loader/Loader";
 import FormContainer from "../../components/FormContainer/FormContainer";
 import { createResident } from "../../actions/residentActions";
-import { STAFF_REGISTER_RESET } from "../../constants/userConstants";
+import { RESIDENT_CREATE_RESET } from "../../constants/residentConstants";
 import { Link } from "react-router-dom";
 
 const AddResidentScreen = ({ history }) => {
@@ -28,8 +28,8 @@ const AddResidentScreen = ({ history }) => {
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       if (success) {
-        dispatch({ type: STAFF_REGISTER_RESET });
-        history.push("/staff");
+        dispatch({ type: RESIDENT_CREATE_RESET });
+        history.push("/residents");
       }
     } else {
       history.push("/login");
@@ -47,32 +47,32 @@ const AddResidentScreen = ({ history }) => {
         Go Back
       </Link>
       <FormContainer>
-        <h1>Add Staff Member</h1>
+        <h1>Add Resident</h1>
         {error && <Message variant="danger">{error}</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name" className="mb-2">
             <Form.Label>Name</Form.Label>
-            <Form.Control type="name" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)}></Form.Control>
+            <Form.Control type="name" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} required></Form.Control>
           </Form.Group>
 
           <Form.Group controlId="nhi" className="mb-2">
             <Form.Label>NHI Number</Form.Label>
-            <Form.Control type="text" placeholder="Enter NHI" value={nhi} onChange={(e) => setNhi(e.target.value)}></Form.Control>
+            <Form.Control type="text" placeholder="Enter NHI" minLength="7" maxLength="7" value={nhi} onChange={(e) => setNhi(e.target.value)} required></Form.Control>
           </Form.Group>
 
           <Form.Group controlId="dob" className="mb-2">
             <Form.Label>Date of Birth</Form.Label>
-            <Form.Control type="date" placeholder="Enter Date of Birth" value={dob} onChange={(e) => setDob(e.target.value)}></Form.Control>
+            <Form.Control type="date" placeholder="Enter Date of Birth" value={dob} onChange={(e) => setDob(e.target.value)} required></Form.Control>
           </Form.Group>
 
           <Form.Group controlId="gender" className="mb-2">
             <Form.Label>Gender</Form.Label>
-            <Form.Select aria-label="Gender" value={gender} onChange={(e) => setGender(e.target.value)}>
-              <option>Select which Gender</option>
+            <select className="form-control my-select" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} required>
+              <option>Select Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
-            </Form.Select>
+            </select>
           </Form.Group>
 
           <Form.Group controlId="height" className="mb-2">

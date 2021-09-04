@@ -10,3 +10,14 @@
   border: 1px solid #ddd !important;
   margin-bottom: 10px;
 }
+
+.my-select {
+  cursor: pointer;
+  background-image: url(./assets/icon.svg) !important;
+  background-position: right 1.5rem !important;
+  background-size: 16px 12px !important;
+}
+
+a {
+  text-decoration: none !important;
+}
