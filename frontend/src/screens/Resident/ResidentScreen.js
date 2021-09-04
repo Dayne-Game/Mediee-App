@@ -72,7 +72,7 @@ const ResidentScreen = ({ history }) => {
                   {residents.map((resident) => (
                     <tr key={resident._id}>
                       <td>
-                        <Link to={`/residentprofile/${resident._id}`}>{resident.name}</Link>
+                        <Link to={`/staffprofile/${resident._id}`}>{resident.name}</Link>
                       </td>
                       <td>{resident.nhi}</td>
                       <td>

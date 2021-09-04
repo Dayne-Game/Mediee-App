@@ -13,7 +13,7 @@ import "./index.css";
 import EditStaffScreen from "./screens/Staff/EditStaffScreen";
 import StaffProfileScreen from "./screens/Staff/StaffProfileScreen";
 import ResidentScreen from "./screens/Resident/ResidentScreen";
-import AddResidentScreen from "./screens/Resident/AddResidentScreen";
+import AddResidentScreen from "../src/screens/Resident/AddResidentScreen";
 
 function App() {
   return (
@@ -28,9 +28,13 @@ function App() {
           <Route path="/search/:keyword" component={StaffScreen} exact />
           <Route path="/staff" component={StaffScreen} exact />
           <Route path="/staff/edit/:id" component={EditStaffScreen} />
-          <Route path="/staffprofile/:id" component={StaffProfileScreen} exact />
+          <Route
+            path="/staffprofile/:id"
+            component={StaffProfileScreen}
+            exact
+          />
           <Route path="/residents" component={ResidentScreen} exact />
-          <Route path="/residents/add" component={AddResidentScreen} exact />
+          <Route path="/residents/add" component={AddResidentScreen} />
         </Container>
       </div>
     </Router>
