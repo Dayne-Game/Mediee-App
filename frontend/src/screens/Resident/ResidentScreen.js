@@ -49,26 +49,28 @@ const ResidentScreen = ({ history, match }) => {
         <Card>
           <Fragment>
             <Card.Header>
-              <Nav>
-                <Nav.Item style={{ marginRight: "10px" }}>
-                  <h3>Residents</h3>
-                </Nav.Item>
-                {userInfo && userInfo.isAdmin && (
-                  <Nav.Item>
-                    <Link to="/resident/add" className="btn btn-info">
-                      Add Resident
-                    </Link>
+              <div className="d-flex justify-content-between">
+                <Nav className="me-auto d-flex align-items-center">
+                  <Nav.Item style={{ marginRight: "10px", lineHeight: "50px" }}>
+                    <h3>Residents</h3>
                   </Nav.Item>
-                )}
-              </Nav>
+                  {userInfo && userInfo.isAdmin && (
+                    <Nav.Item>
+                      <Link to="/resident/add" className="btn btn-info">
+                        Add Resident
+                      </Link>
+                    </Nav.Item>
+                  )}
+                </Nav>
+                <Route render={({ history }) => <ResidentSearchBox history={history} />} />
+              </div>
             </Card.Header>
             <Card.Body>
-              <Route render={({ history }) => <ResidentSearchBox history={history} />} />
               {residents.length === 0 ? (
                 <p>There are no residents</p>
               ) : (
                 <Fragment>
-                  <p>Total number of users: {residents && residents.length}</p>
+                  <p>Number of Residents: {residents && residents.length}</p>
                   <Table striped bordered>
                     <thead>
                       <tr>

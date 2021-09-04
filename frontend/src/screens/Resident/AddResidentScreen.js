@@ -68,7 +68,7 @@ const AddResidentScreen = ({ history }) => {
 
           <Form.Group controlId="gender" className="mb-2">
             <Form.Label>Gender</Form.Label>
-            <select className="form-control my-select" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} required>
+            <select className="form-select form-control" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} required>
               <option>Select Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
