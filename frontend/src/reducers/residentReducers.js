@@ -21,11 +21,13 @@ import {
 export const residentListReducer = (state = { residents: [] }, action) => {
   switch (action.type) {
     case RESIDENT_LIST_REQUEST:
-      return { loading: true };
+      return { loading: true, residents: [] };
     case RESIDENT_LIST_SUCCESS:
       return {
         loading: false,
-        residents: action.payload,
+        residents: action.payload.residents,
+        pages: action.payload.pages,
+        page: action.payload.page,
       };
     case RESIDENT_LIST_FAIL:
       return { loading: false, error: action.payload };

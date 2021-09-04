@@ -20,34 +20,36 @@ import {
 } from "../constants/residentConstants";
 import { logout } from "./userActions";
 
-export const listResidents = () => async (dispatch, getState) => {
-  try {
-    dispatch({ type: RESIDENT_LIST_REQUEST });
+export const listResidents =
+  (keyword = "", pageNumber = "") =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({ type: RESIDENT_LIST_REQUEST });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
+      const {
+        userLogin: { userInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
 
-    const { data } = await axios.get(`/api/residents`, config);
+      const { data } = await axios.get(`/api/residents?keyword=${keyword}&pageNumber=${pageNumber}`, config);
 
-    dispatch({ type: RESIDENT_LIST_SUCCESS, payload: data });
-  } catch (error) {
-    const message = error.response && error.response.data.message ? error.response.data.message : error.message;
-    if (message === "Not authorized, token failed") {
-      dispatch(logout());
+      dispatch({ type: RESIDENT_LIST_SUCCESS, payload: data });
+    } catch (error) {
+      const message = error.response && error.response.data.message ? error.response.data.message : error.message;
+      if (message === "Not authorized, token failed") {
+        dispatch(logout());
+      }
+      dispatch({
+        type: RESIDENT_LIST_FAIL,
+        payload: message,
+      });
     }
-    dispatch({
-      type: RESIDENT_LIST_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
 
 export const deleteResident = (id) => async (dispatch, getState) => {
   try {

@@ -5,12 +5,30 @@ import Resident from "../models/residentModel.js";
 // @route   Get /api/residents
 // @access  Private
 const getResidents = asyncHandler(async (req, res) => {
+  const pageSize = 10;
+  const page = Number(req.query.pageNumber) || 1;
+
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: "i",
+        },
+      }
+    : {};
+
+  const count = await Resident.countDocuments({ ...keyword });
+
   if (req.user.isOwner === true) {
-    const residents = await Resident.find({ user: req.user.id });
-    res.json(residents);
+    const residents = await Resident.find({ $or: [{ user: req.user.id }], ...keyword })
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
+    res.json({ residents, page, pages: Math.ceil(count / pageSize) });
   } else if (req.user.isOwner === false) {
-    const residents = await Resident.find({ user: req.user.owner });
-    res.json(residents);
+    const residents = await Resident.find({ $or: [{ user: req.user.owner }], ...keyword })
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
+    res.json({ residents, page, pages: Math.ceil(count / pageSize) });
   } else {
     res.status(400).send("Residents not Found");
   }
@@ -25,6 +43,13 @@ const registerResident = asyncHandler(async (req, res) => {
   if (name === "" || name === null || nhi === "" || nhi === null || dob === "" || dob === null || gender === null || gender === "") {
     res.status(400);
     throw new Error("Invalid Resident Data");
+  }
+
+  const residentExists = await Resident.findOne({ nhi });
+
+  if (residentExists) {
+    res.status(400);
+    throw new Error("Resident Already Exists");
   }
 
   if (req.user.isOwner === true) {
