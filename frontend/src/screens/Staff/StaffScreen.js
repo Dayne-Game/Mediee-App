@@ -49,12 +49,12 @@ const StaffScreen = ({ history, match }) => {
               <div className="d-flex justify-content-between">
                 <Nav className="me-auto d-flex align-items-center">
                   <Nav.Item style={{ marginRight: "10px", lineHeight: "50px" }}>
-                    <h3>Staff Members</h3>
+                    <h3 style={{ paddingTop: "8px" }}>Staff Members</h3>
                   </Nav.Item>
                   {userInfo && userInfo.isAdmin && (
                     <Nav.Item>
                       <Link to="/staff/add" className="btn btn-info">
-                        Add Resident
+                        Add Staff Member
                       </Link>
                     </Nav.Item>
                   )}

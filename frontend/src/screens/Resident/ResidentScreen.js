@@ -52,7 +52,7 @@ const ResidentScreen = ({ history, match }) => {
               <div className="d-flex justify-content-between">
                 <Nav className="me-auto d-flex align-items-center">
                   <Nav.Item style={{ marginRight: "10px", lineHeight: "50px" }}>
-                    <h3>Residents</h3>
+                    <h3 style={{ paddingTop: "8px" }}>Residents</h3>
                   </Nav.Item>
                   {userInfo && userInfo.isAdmin && (
                     <Nav.Item>
