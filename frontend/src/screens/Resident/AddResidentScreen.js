@@ -62,6 +62,7 @@ const AddResidentScreen = ({ history }) => {
               placeholder="Enter name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              required
             ></Form.Control>
           </Form.Group>
 
@@ -72,6 +73,7 @@ const AddResidentScreen = ({ history }) => {
               placeholder="Enter NHI"
               value={nhi}
               onChange={(e) => setNhi(e.target.value)}
+              required
             ></Form.Control>
           </Form.Group>
 
@@ -82,6 +84,7 @@ const AddResidentScreen = ({ history }) => {
               placeholder="Enter Date of Birth"
               value={dob}
               onChange={(e) => setDob(e.target.value)}
+              required
             ></Form.Control>
           </Form.Group>
 
@@ -91,6 +94,7 @@ const AddResidentScreen = ({ history }) => {
               aria-label="Gender"
               value={gender}
               onChange={(e) => setGender(e.target.value)}
+              required
             >
               <option>Select which Gender</option>
               <option value="Male">Male</option>

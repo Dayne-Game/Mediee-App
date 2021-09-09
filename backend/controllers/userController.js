@@ -1,5 +1,4 @@
 import asyncHandler from "express-async-handler";
-import router from "express-router";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
 import { check, validationResult } from "express-validator";
@@ -34,7 +33,14 @@ const authUser = asyncHandler(async (req, res) => {
 const registerOwner = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
-  if (name === "" || name === null || email === "" || email === null || password === null || password === "") {
+  if (
+    name === "" ||
+    name === null ||
+    email === "" ||
+    email === null ||
+    password === null ||
+    password === ""
+  ) {
     res.status(400);
     throw new Error("Invalid Owner Data");
   }
@@ -88,10 +94,16 @@ const getUsers = asyncHandler(async (req, res) => {
     : {};
 
   if (req.user.isOwner === true) {
-    const staffUsers = await User.find({ $or: [{ _id: req.user._id }, { owner: req.user._id }], ...keyword }).select("-password");
+    const staffUsers = await User.find({
+      $or: [{ _id: req.user._id }, { owner: req.user._id }],
+      ...keyword,
+    }).select("-password");
     res.json(staffUsers);
   } else if (req.user.isAdmin === true && req.user.isOwner === false) {
-    const adminStaff = await User.find({ $or: [{ owner: req.user.owner }], ...keyword }).select("-password");
+    const adminStaff = await User.find({
+      $or: [{ owner: req.user.owner }],
+      ...keyword,
+    }).select("-password");
     res.json(adminStaff);
   } else {
     res.status(401);
@@ -105,7 +117,16 @@ const getUsers = asyncHandler(async (req, res) => {
 const registerStaff = asyncHandler(async (req, res) => {
   const { name, email, role, password, isAdmin } = req.body;
 
-  if (name === "" || name === null || email === "" || email === null || role === "" || role === null || password === null || password === "") {
+  if (
+    name === "" ||
+    name === null ||
+    email === "" ||
+    email === null ||
+    role === "" ||
+    role === null ||
+    password === null ||
+    password === ""
+  ) {
     res.status(400);
     throw new Error("Invalid Owner Data");
   }
@@ -206,4 +227,12 @@ const getUserById = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerOwner, getUsers, authUser, registerStaff, deleteUser, updateUser, getUserById };
+export {
+  registerOwner,
+  getUsers,
+  authUser,
+  registerStaff,
+  deleteUser,
+  updateUser,
+  getUserById,
+};

@@ -58,36 +58,66 @@ const AddStaffScreen = ({ history }) => {
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name" className="mb-2">
             <Form.Label>Name</Form.Label>
-            <Form.Control type="name" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)}></Form.Control>
+            <Form.Control
+              type="name"
+              placeholder="Enter name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            ></Form.Control>
           </Form.Group>
 
           <Form.Group controlId="email" className="mb-2">
             <Form.Label>Email Address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)}></Form.Control>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></Form.Control>
           </Form.Group>
 
           <Form.Group controlId="role" className="mb-2">
             <Form.Label>Job Role / Description</Form.Label>
-            <Form.Control type="text" placeholder="Enter Role" value={role} onChange={(e) => setRole(e.target.value)}></Form.Control>
+            <Form.Control
+              type="text"
+              placeholder="Enter Role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            ></Form.Control>
           </Form.Group>
 
           <Form.Group controlId="password" className="mb-2">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)}></Form.Control>
+            <Form.Control
+              type="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></Form.Control>
           </Form.Group>
 
           <Form.Group controlId="confirmPassword" className="mb-3">
             <Form.Label>Confirm Password</Form.Label>
-            <Form.Control type="password" placeholder="Confirm password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}></Form.Control>
+            <Form.Control
+              type="password"
+              placeholder="Confirm password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            ></Form.Control>
           </Form.Group>
 
           <Form.Group controlId="isadmin">
-            <Form.Check type="checkbox" label="Is Admin" checked={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)}></Form.Check>
+            <Form.Check
+              type="checkbox"
+              label="Is Admin"
+              checked={isAdmin}
+              onChange={(e) => setIsAdmin(e.target.checked)}
+            ></Form.Check>
           </Form.Group>
 
           <div className="d-grid">
             <Button type="submit" className="login-submit-button">
-              Register
+              ADD STAFF MEMBER
             </Button>
           </div>
         </Form>
