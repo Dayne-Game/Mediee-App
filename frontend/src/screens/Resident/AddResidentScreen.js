@@ -5,7 +5,7 @@ import Message from "../../components/Message/Message";
 import Loader from "../../components/loader/Loader";
 import FormContainer from "../../components/FormContainer/FormContainer";
 import { createResident } from "../../actions/residentActions";
-import { STAFF_REGISTER_RESET } from "../../constants/userConstants";
+import { RESIDENT_CREATE_RESET } from "../../constants/residentConstants";
 import { Link } from "react-router-dom";
 
 const AddResidentScreen = ({ history }) => {
@@ -22,14 +22,14 @@ const AddResidentScreen = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const staffRegister = useSelector((state) => state.staffRegister);
-  const { loading, error, success } = staffRegister;
+  const residentCreate = useSelector((state) => state.residentCreate);
+  const { loading, error, success } = residentCreate;
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       if (success) {
-        dispatch({ type: STAFF_REGISTER_RESET });
-        history.push("/staff");
+        dispatch({ type: RESIDENT_CREATE_RESET });
+        history.push("/residents");
       }
     } else {
       history.push("/login");
@@ -38,11 +38,7 @@ const AddResidentScreen = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (name === "" || name === null) {
-      dispatch(
-        createResident(name, nhi, dob, gender, height, weight, bloodtype)
-      );
-    }
+    dispatch(createResident(name, nhi, dob, gender, height, weight, bloodtype));
   };
 
   return (
@@ -51,12 +47,13 @@ const AddResidentScreen = ({ history }) => {
         Go Back
       </Link>
       <FormContainer>
-        <h1>Add Staff Member</h1>
+        <h1>Add Resident</h1>
         {error && <Message variant="danger">{error}</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name" className="mb-2">
             <Form.Label>Name</Form.Label>
+<<<<<<< HEAD
             <Form.Control
               type="name"
               placeholder="Enter name"
@@ -64,10 +61,14 @@ const AddResidentScreen = ({ history }) => {
               onChange={(e) => setName(e.target.value)}
               required
             ></Form.Control>
+=======
+            <Form.Control type="name" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} required></Form.Control>
+>>>>>>> 66933e843efb1a10c7003ea07b7653160f391b2c
           </Form.Group>
 
           <Form.Group controlId="nhi" className="mb-2">
             <Form.Label>NHI Number</Form.Label>
+<<<<<<< HEAD
             <Form.Control
               type="text"
               placeholder="Enter NHI"
@@ -75,10 +76,14 @@ const AddResidentScreen = ({ history }) => {
               onChange={(e) => setNhi(e.target.value)}
               required
             ></Form.Control>
+=======
+            <Form.Control type="text" placeholder="Enter NHI" minLength="7" maxLength="7" value={nhi} onChange={(e) => setNhi(e.target.value)} required></Form.Control>
+>>>>>>> 66933e843efb1a10c7003ea07b7653160f391b2c
           </Form.Group>
 
           <Form.Group controlId="dob" className="mb-2">
             <Form.Label>Date of Birth</Form.Label>
+<<<<<<< HEAD
             <Form.Control
               type="date"
               placeholder="Enter Date of Birth"
@@ -86,10 +91,14 @@ const AddResidentScreen = ({ history }) => {
               onChange={(e) => setDob(e.target.value)}
               required
             ></Form.Control>
+=======
+            <Form.Control type="date" placeholder="Enter Date of Birth" value={dob} onChange={(e) => setDob(e.target.value)} required></Form.Control>
+>>>>>>> 66933e843efb1a10c7003ea07b7653160f391b2c
           </Form.Group>
 
           <Form.Group controlId="gender" className="mb-2">
             <Form.Label>Gender</Form.Label>
+<<<<<<< HEAD
             <Form.Select
               aria-label="Gender"
               value={gender}
@@ -97,39 +106,28 @@ const AddResidentScreen = ({ history }) => {
               required
             >
               <option>Select which Gender</option>
+=======
+            <select className="form-select form-control" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} required>
+              <option>Select Gender</option>
+>>>>>>> 66933e843efb1a10c7003ea07b7653160f391b2c
               <option value="Male">Male</option>
               <option value="Female">Female</option>
-            </Form.Select>
+            </select>
           </Form.Group>
 
           <Form.Group controlId="height" className="mb-2">
             <Form.Label>Height</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter Height"
-              value={height}
-              onChange={(e) => setHeight(e.target.value)}
-            ></Form.Control>
+            <Form.Control type="number" placeholder="Enter Height" value={height} onChange={(e) => setHeight(e.target.value)}></Form.Control>
           </Form.Group>
 
           <Form.Group controlId="weight" className="mb-2">
             <Form.Label>Weight</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter Weight"
-              value={weight}
-              onChange={(e) => setWeight(e.target.value)}
-            ></Form.Control>
+            <Form.Control type="number" placeholder="Enter Weight" value={weight} onChange={(e) => setWeight(e.target.value)}></Form.Control>
           </Form.Group>
 
           <Form.Group controlId="bloodtype" className="mb-3">
             <Form.Label>Bloodtype</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Bloodtype"
-              value={bloodtype}
-              onChange={(e) => setBloodtype(e.target.value)}
-            ></Form.Control>
+            <Form.Control type="text" placeholder="Enter Bloodtype" value={bloodtype} onChange={(e) => setBloodtype(e.target.value)}></Form.Control>
           </Form.Group>
 
           <div className="d-grid">

@@ -28,13 +28,11 @@ function App() {
           <Route path="/search/:keyword" component={StaffScreen} exact />
           <Route path="/staff" component={StaffScreen} exact />
           <Route path="/staff/edit/:id" component={EditStaffScreen} />
-          <Route
-            path="/staffprofile/:id"
-            component={StaffProfileScreen}
-            exact
-          />
+          <Route path="/staffprofile/:id" component={StaffProfileScreen} exact />
           <Route path="/residents" component={ResidentScreen} exact />
-          <Route path="/residents/add" component={AddResidentScreen} />
+          <Route path="/residents/:pageNumber" component={ResidentScreen} exact />
+          <Route path="/resident/add" component={AddResidentScreen} exact />
+          <Route path="/resident/search/:keyword" component={ResidentScreen} exact />
         </Container>
       </div>
     </Router>
