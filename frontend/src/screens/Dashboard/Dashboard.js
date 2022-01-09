@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Sidebar from "../../components/Sidebar.js";
 
 const Dashboard = ({ location, history }) => {
   const dispatch = useDispatch();
@@ -14,9 +15,31 @@ const Dashboard = ({ location, history }) => {
   }, [dispatch, history, userInfo]);
 
   return (
-    <div>
-      {userInfo ? <h1>Welcome {userInfo.name}</h1> : <h1>Not Logged In</h1>}
-    </div>
+    <Fragment>
+      <Sidebar />
+      <div className="container-minus-sidebar">
+        <div className="title-bar">
+          <h1>Dashboard</h1>
+          <div className="container-flex">
+            <img
+              src={userInfo.profile_image}
+              alt="Profile"
+              className="user-image"
+            />
+            {userInfo ? (
+              <div className="user-text-box">
+                <p className="user-name">
+                  {userInfo.fname} {userInfo.lname}
+                </p>
+                <p className="user-tagline">{userInfo.role}</p>
+              </div>
+            ) : (
+              <p>Not logged in</p>
+            )}
+          </div>
+        </div>
+      </div>
+    </Fragment>
   );
 };
 

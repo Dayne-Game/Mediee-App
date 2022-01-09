@@ -53,7 +53,6 @@ const AddResidentScreen = ({ history }) => {
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name" className="mb-2">
             <Form.Label>Name</Form.Label>
-<<<<<<< HEAD
             <Form.Control
               type="name"
               placeholder="Enter name"
@@ -61,29 +60,23 @@ const AddResidentScreen = ({ history }) => {
               onChange={(e) => setName(e.target.value)}
               required
             ></Form.Control>
-=======
-            <Form.Control type="name" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} required></Form.Control>
->>>>>>> 66933e843efb1a10c7003ea07b7653160f391b2c
           </Form.Group>
 
           <Form.Group controlId="nhi" className="mb-2">
             <Form.Label>NHI Number</Form.Label>
-<<<<<<< HEAD
             <Form.Control
               type="text"
               placeholder="Enter NHI"
+              minLength="7"
+              maxLength="7"
               value={nhi}
               onChange={(e) => setNhi(e.target.value)}
               required
             ></Form.Control>
-=======
-            <Form.Control type="text" placeholder="Enter NHI" minLength="7" maxLength="7" value={nhi} onChange={(e) => setNhi(e.target.value)} required></Form.Control>
->>>>>>> 66933e843efb1a10c7003ea07b7653160f391b2c
           </Form.Group>
 
           <Form.Group controlId="dob" className="mb-2">
             <Form.Label>Date of Birth</Form.Label>
-<<<<<<< HEAD
             <Form.Control
               type="date"
               placeholder="Enter Date of Birth"
@@ -91,25 +84,18 @@ const AddResidentScreen = ({ history }) => {
               onChange={(e) => setDob(e.target.value)}
               required
             ></Form.Control>
-=======
-            <Form.Control type="date" placeholder="Enter Date of Birth" value={dob} onChange={(e) => setDob(e.target.value)} required></Form.Control>
->>>>>>> 66933e843efb1a10c7003ea07b7653160f391b2c
           </Form.Group>
 
           <Form.Group controlId="gender" className="mb-2">
             <Form.Label>Gender</Form.Label>
-<<<<<<< HEAD
-            <Form.Select
-              aria-label="Gender"
+            <select
+              className="form-select form-control"
+              name="gender"
               value={gender}
               onChange={(e) => setGender(e.target.value)}
               required
             >
-              <option>Select which Gender</option>
-=======
-            <select className="form-select form-control" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} required>
               <option>Select Gender</option>
->>>>>>> 66933e843efb1a10c7003ea07b7653160f391b2c
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select>
@@ -117,17 +103,32 @@ const AddResidentScreen = ({ history }) => {
 
           <Form.Group controlId="height" className="mb-2">
             <Form.Label>Height</Form.Label>
-            <Form.Control type="number" placeholder="Enter Height" value={height} onChange={(e) => setHeight(e.target.value)}></Form.Control>
+            <Form.Control
+              type="number"
+              placeholder="Enter Height"
+              value={height}
+              onChange={(e) => setHeight(e.target.value)}
+            ></Form.Control>
           </Form.Group>
 
           <Form.Group controlId="weight" className="mb-2">
             <Form.Label>Weight</Form.Label>
-            <Form.Control type="number" placeholder="Enter Weight" value={weight} onChange={(e) => setWeight(e.target.value)}></Form.Control>
+            <Form.Control
+              type="number"
+              placeholder="Enter Weight"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+            ></Form.Control>
           </Form.Group>
 
           <Form.Group controlId="bloodtype" className="mb-3">
             <Form.Label>Bloodtype</Form.Label>
-            <Form.Control type="text" placeholder="Enter Bloodtype" value={bloodtype} onChange={(e) => setBloodtype(e.target.value)}></Form.Control>
+            <Form.Control
+              type="text"
+              placeholder="Enter Bloodtype"
+              value={bloodtype}
+              onChange={(e) => setBloodtype(e.target.value)}
+            ></Form.Control>
           </Form.Group>
 
           <div className="d-grid">

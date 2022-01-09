@@ -59,7 +59,9 @@ const StaffScreen = ({ history, match }) => {
                     </Nav.Item>
                   )}
                 </Nav>
-                <Route render={({ history }) => <Searchbox history={history} />} />
+                <Route
+                  render={({ history }) => <Searchbox history={history} />}
+                />
               </div>
             </Card.Header>
             <Card.Body>
@@ -82,16 +84,38 @@ const StaffScreen = ({ history, match }) => {
                       {users.map((user) => (
                         <tr key={user._id}>
                           <td>
-                            <Link to={`/staffprofile/${user._id}`}>{user.name}</Link>
+                            <Link to={`/staffprofile/${user._id}`}>
+                              {user.name}
+                            </Link>
                           </td>
                           <td>{user.role}</td>
                           <td>{user.email}</td>
-                          <td>{user.isAdmin ? <i className="fas fa-check" style={{ color: "green" }}></i> : <i className="fas fa-times" style={{ color: "red" }}></i>}</td>
                           <td>
-                            <Link to={`/staff/edit/${user._id}`} className="btn-sm btn btn-info" style={{ marginRight: "10px" }}>
+                            {user.isAdmin ? (
+                              <i
+                                className="fas fa-check"
+                                style={{ color: "green" }}
+                              ></i>
+                            ) : (
+                              <i
+                                className="fas fa-times"
+                                style={{ color: "red" }}
+                              ></i>
+                            )}
+                          </td>
+                          <td>
+                            <Link
+                              to={`/staff/edit/${user._id}`}
+                              className="btn-sm btn btn-info"
+                              style={{ marginRight: "10px" }}
+                            >
                               Edit
                             </Link>
-                            <Button variant="danger" className="btn-sm" onClick={() => deleteHandler(user._id)}>
+                            <Button
+                              variant="danger"
+                              className="btn-sm"
+                              onClick={() => deleteHandler(user._id)}
+                            >
                               DELETE
                             </Button>
                           </td>

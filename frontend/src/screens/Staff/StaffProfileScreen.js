@@ -27,7 +27,17 @@ const StaffProfileScreen = ({ match, history }) => {
     }
   }, [dispatch, history, userInfo, userId, user]);
 
-  return <Fragment>{loading ? <Loader /> : error ? <Message variant="danger">{error}</Message> : <h1>{user.name}</h1>}</Fragment>;
+  return (
+    <Fragment>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
+      ) : (
+        <h1>{user.name}</h1>
+      )}
+    </Fragment>
+  );
 };
 
 export default StaffProfileScreen;
