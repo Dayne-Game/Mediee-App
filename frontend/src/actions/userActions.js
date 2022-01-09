@@ -70,7 +70,7 @@ export const logout = () => (dispatch) => {
 };
 
 export const register =
-  (fname, lname, profile_image, email, password, resthome_name) =>
+  (fname, lname, profile_image, resthome_name, email, password) =>
   async (dispatch) => {
     try {
       dispatch({
@@ -85,7 +85,7 @@ export const register =
 
       const { data } = await axios.post(
         "/api/users/owner",
-        { fname, lname, profile_image, email, password, resthome_name },
+        { fname, lname, profile_image, resthome_name, email, password },
         config
       );
 
@@ -116,11 +116,11 @@ export const registerStaff =
     fname,
     lname,
     profile_image,
+    resthome_name,
     email,
-    role,
     password,
-    isAdmin,
-    resthome_name
+    role,
+    isAdmin
   ) =>
   async (dispatch, getState) => {
     try {
@@ -145,11 +145,11 @@ export const registerStaff =
           fname,
           lname,
           profile_image,
-          email,
-          role,
-          password,
-          isAdmin,
           resthome_name,
+          email,
+          password,
+          role,
+          isAdmin,
         },
         config
       );

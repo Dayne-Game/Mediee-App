@@ -79,7 +79,7 @@ const residentSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    name: {
+    fname: {
       type: String,
       required: true,
     },

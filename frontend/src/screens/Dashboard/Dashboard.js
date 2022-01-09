@@ -12,6 +12,7 @@ const Dashboard = ({ location, history }) => {
     if (!userInfo) {
       history.push("/login");
     }
+    console.log(userInfo.profile_image);
   }, [dispatch, history, userInfo]);
 
   return (

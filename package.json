@@ -7,27 +7,20 @@
   "scripts": {
     "server": "nodemon backend/server"
   },
-  "keywords": [
-    "Resthome",
-    "Care",
-    "Facilties"
-  ],
-  "author": "Dayne Game, Michelle Buyn",
+  "author": "Dayne Game",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "express-async-handler": "^1.1.4",
-    "express-router": "^0.0.1",
-    "express-validator": "^6.12.1",
+    "express": "^4.17.2",
+    "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.5",
+    "mongoose": "^6.1.5",
     "morgan": "^1.10.0",
-    "multer": "^1.4.2"
+    "multer": "^1.4.4"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.15"
   }
 }

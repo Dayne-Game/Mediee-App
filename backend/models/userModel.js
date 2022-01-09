@@ -1,11 +1,21 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
-// userSchema is for creating a company/owner
-// aswell as the staff members for the companies
+// Model for COMPANY / OWNER aswell as STAFF MEMBERS
 const userSchema = mongoose.Schema(
   {
-    name: {
+    fname: {
+      type: String,
+      required: true,
+    },
+    lname: {
+      type: String,
+      required: true,
+    },
+    profile_image: {
+      type: String,
+    },
+    resthome_name: {
       type: String,
       required: true,
     },
@@ -14,11 +24,11 @@ const userSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    role: {
+    password: {
       type: String,
       required: true,
     },
-    password: {
+    role: {
       type: String,
       required: true,
     },
@@ -42,6 +52,7 @@ const userSchema = mongoose.Schema(
   }
 );
 
+// MATCH PASSWORDS and ENCRYPT PASSWORD
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };

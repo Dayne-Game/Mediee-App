@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 
 const Home = ({ location, history }) => {
-  const redirect = location.search
-    ? location.search.split("=")[1]
-    : "/register";
+  const redirect = location.search ? location.search.split("=")[1] : "/login";
 
   useEffect(() => {
     history.push(redirect);

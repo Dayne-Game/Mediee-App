@@ -5,29 +5,34 @@ import Resident from "../models/residentModel.js";
 // @route   Get /api/residents
 // @access  Private
 const getResidents = asyncHandler(async (req, res) => {
-  const pageSize = 10;
+  const pageSize = 6;
   const page = Number(req.query.pageNumber) || 1;
 
-  const keyword = req.query.keyword
-    ? {
-        name: {
-          $regex: req.query.keyword,
-          $options: "i",
-        },
-      }
-    : {};
+  var re = new RegExp(req.query.keyword, "i");
 
   const count = await Resident.countDocuments({ ...keyword });
 
   if (req.user.isOwner === true) {
-    const residents = await Resident.find({ $or: [{ user: req.user.id }], ...keyword })
+    const count = await (
+      await Resident.countDocuments({ user: req.user._id })
+    ).or([{ name: { $regex: re } }, { nhi: { $regex: re } }]);
+
+    const residents = await Resident.find({ user: req.user._id })
+      .or([{ name: { $regex: re } }, { nhi: { $regex: re } }])
       .limit(pageSize)
       .skip(pageSize * (page - 1));
+
     res.json({ residents, page, pages: Math.ceil(count / pageSize) });
   } else if (req.user.isOwner === false) {
-    const residents = await Resident.find({ $or: [{ user: req.user.owner }], ...keyword })
+    const count = await (
+      await Resident.countDocuments({ user: req.user.owner })
+    ).or([{ name: { $regex: re } }, { nhi: { $regex: re } }]);
+
+    const residents = await Resident.find({ user: req.user.owner })
+      .or([{ name: { $regex: re } }, { nhi: { $regex: re } }])
       .limit(pageSize)
       .skip(pageSize * (page - 1));
+
     res.json({ residents, page, pages: Math.ceil(count / pageSize) });
   } else {
     res.status(400).send("Residents not Found");
@@ -40,7 +45,16 @@ const getResidents = asyncHandler(async (req, res) => {
 const registerResident = asyncHandler(async (req, res) => {
   const { name, nhi, dob, gender, height, weight, bloodtype } = req.body;
 
-  if (name === "" || name === null || nhi === "" || nhi === null || dob === "" || dob === null || gender === null || gender === "") {
+  if (
+    name === "" ||
+    name === null ||
+    nhi === "" ||
+    nhi === null ||
+    dob === "" ||
+    dob === null ||
+    gender === null ||
+    gender === ""
+  ) {
     res.status(400);
     throw new Error("Invalid Resident Data");
   }
