@@ -28,7 +28,7 @@ const Dashboard = ({ location, history }) => {
             role={userInfo.role}
           />
         ) : (
-          <h1>Not logged In</h1>
+          <p>Not Logged In</p>
         )}
       </div>
     </Fragment>
