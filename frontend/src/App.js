@@ -7,6 +7,7 @@ import Home from "./screens/Home/Home";
 
 import "./index.css";
 import LoginScreen from "./screens/Login/LoginScreen";
+import StaffScreen from "./screens/Staff/StaffScreen";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/register" component={RegisterScreen} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/login" component={LoginScreen} />
+      <Route path="/staff" component={StaffScreen} />
     </Router>
   );
 }
