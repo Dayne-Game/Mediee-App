@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listStaff, deleteUser } from "../../actions/userActions";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 import Title from "../../components/Title";
 // import Searchbox from "../../components/Searchbox";
@@ -74,7 +74,7 @@ const StaffScreen = ({ history, match }) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {users.map((user) => {
+                      {users.map((user) => (
                         <tr key={user._id}>
                           <td>
                             <img
@@ -107,7 +107,7 @@ const StaffScreen = ({ history, match }) => {
                               to={`/staff/edit/${user._id}`}
                               style={{ color: "skyblue", marginRight: "10px" }}
                             >
-                              edit
+                              Edit
                             </Link>
                             <Link
                               to="#"
@@ -116,8 +116,8 @@ const StaffScreen = ({ history, match }) => {
                               DELETE
                             </Link>
                           </td>
-                        </tr>;
-                      })}
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </Fragment>

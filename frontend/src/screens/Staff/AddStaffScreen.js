@@ -75,10 +75,10 @@ const AddStaffScreen = ({ history }) => {
           fname,
           lname,
           image,
+          resthome_name,
           email,
           password,
           role,
-          resthome_name,
           isAdmin
         )
       );
@@ -100,6 +100,96 @@ const AddStaffScreen = ({ history }) => {
         ) : (
           <p>Not Logged In</p>
         )}
+        <form onSubmit={submitHandler} className="form-container">
+          {message && <Message variant="danger">{message}</Message>}
+          {error && <Message variant="danger">{error}</Message>}
+          {loading && <Loader />}
+          <div className="input-container">
+            <input
+              type="name"
+              className="form-input"
+              placeholder="First Name"
+              value={fname}
+              onChange={(e) => setFname(e.target.value)}
+            ></input>
+            <input
+              type="name"
+              className="form-input"
+              placeholder="Last Name"
+              value={lname}
+              onChange={(e) => setLname(e.target.value)}
+            ></input>
+          </div>
+          <div className="input-container upload-input">
+            <label>Upload Profile Picture</label>
+            <input
+              type="file"
+              id="image-file"
+              placeholder="Profile Image"
+              className="form-input"
+              onChange={uploadFileHandler}
+            ></input>
+            {uploading && <Loader />}
+          </div>
+          <div className="input-container">
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Resthome Name"
+              value={resthome_name}
+              onChange={(e) => setResthome_name(e.target.value)}
+            ></input>
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            ></input>
+          </div>
+
+          <div className="input-container">
+            <input
+              type="email"
+              className="form-input"
+              placeholder="Enter Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></input>
+          </div>
+          <div className="input-container">
+            <input
+              type="password"
+              className="form-input"
+              placeholder="Enter Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+            <input
+              type="password"
+              className="form-input"
+              placeholder="Re-Enter Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            ></input>
+          </div>
+          <div className="input-container">
+            <label for="isadmin">Is Admin</label>
+            <input
+              type="checkbox"
+              className="form-input"
+              label="Is Admin"
+              id="isadmin"
+              checked={isAdmin}
+              onChange={(e) => setIsAdmin(e.target.checked)}
+            ></input>
+          </div>
+          <div className="input-container">
+            <button type="submit" className="form-button">
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
     </Fragment>
   );
