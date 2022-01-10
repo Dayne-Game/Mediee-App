@@ -1,6 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../../components/Sidebar.js";
+import Title from "../../components/Title.js";
 
 const Dashboard = ({ location, history }) => {
   const dispatch = useDispatch();
@@ -12,33 +13,23 @@ const Dashboard = ({ location, history }) => {
     if (!userInfo) {
       history.push("/login");
     }
-    console.log(userInfo.profile_image);
   }, [dispatch, history, userInfo]);
 
   return (
     <Fragment>
       <Sidebar />
       <div className="container-minus-sidebar">
-        <div className="title-bar">
-          <h1>Dashboard</h1>
-          <div className="container-flex">
-            <img
-              src={userInfo.profile_image}
-              alt="Profile"
-              className="user-image"
-            />
-            {userInfo ? (
-              <div className="user-text-box">
-                <p className="user-name">
-                  {userInfo.fname} {userInfo.lname}
-                </p>
-                <p className="user-tagline">{userInfo.role}</p>
-              </div>
-            ) : (
-              <p>Not logged in</p>
-            )}
-          </div>
-        </div>
+        {userInfo ? (
+          <Title
+            title="Dashboard"
+            fname={userInfo.fname}
+            lname={userInfo.lname}
+            image={userInfo.profile_image}
+            role={userInfo.role}
+          />
+        ) : (
+          <h1>Not logged In</h1>
+        )}
       </div>
     </Fragment>
   );

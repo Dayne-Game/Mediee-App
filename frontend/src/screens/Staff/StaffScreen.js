@@ -5,6 +5,7 @@ import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { Link, Route } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
+import Title from "../../components/Title";
 // import Searchbox from "../../components/Searchbox";
 
 const StaffScreen = ({ history, match }) => {
@@ -46,26 +47,17 @@ const StaffScreen = ({ history, match }) => {
         <Fragment>
           <Sidebar />
           <div className="container-minus-sidebar">
-            <div className="title-bar">
-              <h1>Staff Members</h1>
-              <div className="container-flex">
-                <img
-                  src={userInfo.profile_image}
-                  alt="Profile"
-                  className="user-image"
-                />
-                {userInfo ? (
-                  <div className="user-text-box">
-                    <p className="user-name">
-                      {userInfo.fname} {userInfo.lname}
-                    </p>
-                    <p className="user-tagline">{userInfo.role}</p>
-                  </div>
-                ) : (
-                  <p>Not logged in</p>
-                )}
-              </div>
-            </div>
+            {userInfo ? (
+              <Title
+                title="Staff Members"
+                fname={userInfo.fname}
+                lname={userInfo.lname}
+                image={userInfo.profile_image}
+                role={userInfo.role}
+              />
+            ) : (
+              <p>Not Logged In</p>
+            )}
             <div style={{ paddingLeft: "10px" }}>
               {users.length === 0 ? (
                 <p>No Staff Members Found</p>

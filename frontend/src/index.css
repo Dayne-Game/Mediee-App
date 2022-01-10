@@ -432,7 +432,7 @@ tr:last-child td:last-child {
   width: 120px;
   height: 120px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite; 
+  animation: spin 2s linear infinite;
 }
 
 /* Safari */
@@ -460,4 +460,20 @@ tr:last-child td:last-child {
 
 .upload-input > label {
   padding-left: 5px;
+}
+
+.breadcrumbs {
+  background: var(--grey);
+  padding: 10px;
+  margin: 10px;
+  border-radius: 4px;
+}
+
+.breadcrumbs .current-page {
+  color: var(--grey-font);
+}
+
+.slash {
+  margin-left: 10px;
+  margin-right: 10px;
 }

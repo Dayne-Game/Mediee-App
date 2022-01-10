@@ -1,21 +1,26 @@
+import axios from "axios";
 import React, { useState, useEffect, Fragment } from "react";
-import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Message from "../../components/Message/Message";
-import Loader from "../../components/loader/Loader";
-import FormContainer from "../../components/FormContainer/FormContainer";
+import Message from "../../components/Message";
+import Loader from "../../components/Loader";
 import { registerStaff } from "../../actions/userActions";
 import { STAFF_REGISTER_RESET } from "../../constants/userConstants";
 import { Link } from "react-router-dom";
+import Sidebar from "../../components/Sidebar";
+import Title from "../../components/Title";
 
 const AddStaffScreen = ({ history }) => {
-  const [name, setName] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [image, setImage] = useState(""); // profile_image
+  const [resthome_name, setResthome_name] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [role, setRole] = useState("");
   const [message, setMessage] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -36,92 +41,66 @@ const AddStaffScreen = ({ history }) => {
     }
   }, [history, userInfo, success, dispatch]);
 
+  // Profile Image Upload Handler
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.post("/api/upload", formData, config);
+
+      setImage(data);
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
+    }
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
-      dispatch(registerStaff(name, email, role, password, isAdmin));
+      dispatch(
+        registerStaff(
+          fname,
+          lname,
+          image,
+          email,
+          password,
+          role,
+          resthome_name,
+          isAdmin
+        )
+      );
     }
   };
 
   return (
     <Fragment>
-      <Link to="/staff" className="btn btn-light my-3">
-        Go Back
-      </Link>
-      <FormContainer>
-        <h1>Add Staff Member</h1>
-        {message && <Message variant="danger">{message}</Message>}
-        {error && <Message variant="danger">{error}</Message>}
-        {loading && <Loader />}
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId="name" className="mb-2">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="name"
-              placeholder="Enter name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group controlId="email" className="mb-2">
-            <Form.Label>Email Address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group controlId="role" className="mb-2">
-            <Form.Label>Job Role / Description</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Role"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group controlId="password" className="mb-2">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group controlId="confirmPassword" className="mb-3">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Confirm password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group controlId="isadmin">
-            <Form.Check
-              type="checkbox"
-              label="Is Admin"
-              checked={isAdmin}
-              onChange={(e) => setIsAdmin(e.target.checked)}
-            ></Form.Check>
-          </Form.Group>
-
-          <div className="d-grid">
-            <Button type="submit" className="login-submit-button">
-              ADD STAFF MEMBER
-            </Button>
-          </div>
-        </Form>
-      </FormContainer>
+      <Sidebar />
+      <div className="container-minus-sidebar">
+        {userInfo ? (
+          <Title
+            title="Add Staff Member"
+            fname={userInfo.fname}
+            lname={userInfo.lname}
+            image={userInfo.profile_image}
+            role={userInfo.role}
+          />
+        ) : (
+          <p>Not Logged In</p>
+        )}
+      </div>
     </Fragment>
   );
 };
